@@ -24,7 +24,7 @@ class Class(object):
             if self.lower is None:
                 self.lower = Class('lower')
             return self.lower.add_person(person, person_class[1:])
-        
+
         raise ValueError(f"Invalid class: {person_class}")
 
     def _print(self, a_class):
@@ -44,19 +44,18 @@ class Class(object):
 if __name__ == "__main__":
     cases = int(input())
     for _ in range(cases):
-        
+
         # Number of input data
+        d = []
         no = int(input())
-        d = {}
         for _ in range(no):
             name, data = input().split(":")
             data = data.strip().split(" ")[0].split('-')
-            d[name.strip()] = data
+            data = ['middle'] * (10 - len(data)) + data
+            d.append((name.strip(), data))
 
         root = Class('root')
-        for person, pclass in d.items():
-            while(len(pclass) < 10):
-                pclass = ["middle"] + pclass
+        for person, pclass in d:
             root.add_person(person, pclass[::-1])
         root.print()
         print("="*30)
